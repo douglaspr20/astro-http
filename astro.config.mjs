@@ -4,8 +4,6 @@ import mdx from '@astrojs/mdx';
 
 import sitemap from '@astrojs/sitemap';
 
-import node from '@astrojs/node';
-
 import cloudflare from '@astrojs/cloudflare';
 
 // https://astro.build/config
