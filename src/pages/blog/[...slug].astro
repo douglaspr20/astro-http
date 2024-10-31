@@ -1,13 +1,15 @@
 ---
 import { type CollectionEntry, getCollection } from 'astro:content';
 import BlogPost from '../../layouts/BlogPost.astro';
+// import LikeCounter from '@components/Likes/LikeCounter';
+import LikeCounterActions from '@components/Likes/LikeCounterAction';
 
 export async function getStaticPaths() {
-	const posts = await getCollection('blog');
-	return posts.map((post) => ({
-		params: { slug: post.slug },
-		props: post,
-	}));
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: post,
+  }));
 }
 type Props = CollectionEntry<'blog'>;
 
@@ -16,5 +18,15 @@ const { Content } = await post.render();
 ---
 
 <BlogPost {...post.data}>
-	<Content />
+  <div
+    style={{
+      height: '50px',
+    }}
+  >
+    <LikeCounterActions
+      postId={post.id}
+      client:only='react'
+    />
+  </div>
+  <Content />
 </BlogPost>
